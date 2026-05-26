@@ -1,0 +1,44 @@
+name: Notify Practical-Starlight to rebuild
+
+# Whenever content changes here, fire a repository_dispatch into the
+# Practical-Starlight repo so it rebuilds and redeploys with the new content.
+#
+# Setup (one-time):
+#   1. Create a fine-grained PAT with `contents: read+write` and `metadata: read`
+#      on the Practical-Starlight repo. Name it something like STARLIGHT_DISPATCH_PAT.
+#   2. Add it as a repo secret in THIS repo: Settings -> Secrets -> Actions ->
+#      New repository secret -> name: STARLIGHT_DISPATCH_PAT
+#
+# If you skip the PAT, the daily cron in Practical-Starlight's deploy.yml
+# (03:17 UTC) still picks up changes within 24 hours.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.md'
+      - '**.mdx'
+      - '**.png'
+      - '**.jpg'
+      - '**.jpeg'
+      - '**.gif'
+      - '**.svg'
+      - '**.webp'
+  workflow_dispatch:
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Practical-Starlight rebuild
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.STARLIGHT_DISPATCH_PAT }}
+          repository: Beny942k6xu4/Practical-Starlight
+          event-type: content-updated
+          client-payload: |
+            {
+              "from": "${{ github.repository }}",
+              "sha": "${{ github.sha }}",
+              "ref": "${{ github.ref }}"
+            }

@@ -1,0 +1,11 @@
+# Obsidian / editor
+.obsidian/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local dev artifacts (none expected here, but defensive)
+node_modules/
+dist/
