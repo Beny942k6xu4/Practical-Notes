@@ -10,6 +10,7 @@ PowerShell 是 Server 領域下的**自動化與系統管理 shell**。本子領
 ## Topics
 
 - **[basic-learn](./basic-learn/)** — 入門核心 Cmdlet 與通用參數的學習主題。建議從這裡開始。
+- **[dotnet-api](./dotnet-api/)** — PowerShell 背後的 .NET API 筆記（`System.Management.Automation`）。解釋「為什麼 cmdlet 這樣行為」、「為什麼物件這樣顯示」這類需要 runtime 視角的問題。
 
 > 之後預期擴充：`scripting`（流程控制、函式、模組）、`remoting`（PSRemoting、SSH transport）、`deployment`（DSC、套件管理）等 topic。
 
